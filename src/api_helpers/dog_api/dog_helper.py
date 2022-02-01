@@ -8,12 +8,12 @@ class DogHelper:
 
     def __init__(self, host):
         self.host = host
-        self.request = requests.Session()
+        self.session = requests.Session()
         self.valid_schema = self.load_schema('valid_schema')
         self.error_schema = self.load_schema('error_schema')
 
     def close(self):
-        self.request.close()
+        self.session.close()
 
     @staticmethod
     def load_schema(schema_name):
@@ -22,14 +22,14 @@ class DogHelper:
             schema = json.load(f)
         return schema
 
-    def get(self, url, payload=None):
+    def _get(self, url, payload=None):
         """
         Отправка "Get" запроса и получение ответа.
         :param url: url для отправки запроса
         :param payload: параметры запроса
         :return: объект requests
         """
-        r = self.request.get(url=url, params=payload)
+        r = self.session.get(url=url, params=payload)
         if r.status_code == 200:
             validate(instance=r.json(), schema=self.valid_schema)
         elif r.status_code == 404:
@@ -45,14 +45,14 @@ class DogHelper:
         :param dog_type: породная группа собак, для которой необходимо получить список пород.
         :return: объект Response
         """
-        return self.get(url=f'{self.host}/breed/{dog_type}/list')
+        return self._get(url=f'{self.host}/breed/{dog_type}/list')
 
     def get_random_image(self):
         """
         Получение изображения случайной собаки.
         :return: объект Response
         """
-        return self.get(url=f'{self.host}/breeds/image/random')
+        return self._get(url=f'{self.host}/breeds/image/random')
 
     def get_by_breed(self, dog_type: str):
         """
@@ -60,7 +60,7 @@ class DogHelper:
         :param dog_type: Порода собак, для которой необходимо получить изображения.
         :return: объект Response
         """
-        return self.get(url=f'{self.host}/breed/{dog_type}/images')
+        return self._get(url=f'{self.host}/breed/{dog_type}/images')
 
     def get_random_breed_images(self, dog_type: str):
         """
@@ -68,4 +68,4 @@ class DogHelper:
         :param dog_type: порода собак для которой необходимо получить изображение.
         :return: объект Response
         """
-        return self.get(url=f'{self.host}/breed/{dog_type}/images/random')
+        return self._get(url=f'{self.host}/breed/{dog_type}/images/random')
