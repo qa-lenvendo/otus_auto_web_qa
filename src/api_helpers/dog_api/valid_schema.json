@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "message": {"type": ["array", "string"]},
+    "status": {"type": "string"}
+  },
+  "required": ["message", "status"]
+}

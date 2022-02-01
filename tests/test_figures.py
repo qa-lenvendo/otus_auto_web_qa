@@ -1,8 +1,8 @@
 from math import sqrt, pi
-from src.triangle import Triangle
-from src.square import Square
-from src.circle import Circle
-from src.rectangle import Rectangle
+from src.figures.triangle import Triangle
+from src.figures.square import Square
+from src.figures.circle import Circle
+from src.figures.rectangle import Rectangle
 
 
 class TestTriangle:
