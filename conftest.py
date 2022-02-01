@@ -1,12 +1,12 @@
-from src.circle import Circle
-from src.rectangle import Rectangle
-from src.triangle import Triangle
-from src.square import Square
+from src.figures.circle import Circle
+from src.figures.rectangle import Rectangle
+from src.figures.triangle import Triangle
+from src.figures.square import Square
 import pytest
-from src.yandex_api import YandexApi
-from src.jsonplaceholder_helper import JsonPlaceholderHelper
-from src.dog_helper import DogHelper
-from src.openbrewerydb_helper import OpenBreweryDb
+from src.api_helpers.yandex_api.yandex_api import YandexApi
+from src.api_helpers.jph_api.jsonplaceholder_helper import JsonPlaceholderHelper
+from src.api_helpers.dog_api.dog_helper import DogHelper
+from src.api_helpers.obdb_api.openbrewerydb_helper import OpenBreweryDb
 
 
 @pytest.fixture(scope='function')
